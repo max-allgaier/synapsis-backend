@@ -26,7 +26,11 @@ public class AccessTokenAuthenticationFilter extends OncePerRequestFilter {
     private final AccessTokenService accessTokenService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain
+    ) throws ServletException, IOException {
         try {
             var authorizationHeader = request.getHeader("Authentication");
             if (authorizationHeader == null || !authorizationHeader.startsWith(BEARER_PREFIX)) {

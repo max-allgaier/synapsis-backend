@@ -8,16 +8,30 @@ import javax.crypto.SecretKey;
 import java.time.ZoneOffset;
 import java.util.UUID;
 
+/**
+ * Service responsible for any JWT related actions, including generating and validating JSON Web Tokens (JWTs).
+ */
 @Service
 public class JwtService {
     private final SecretKey secretKey;
     private final JwtParser parser;
 
+    /**
+     * Initializes a JwtService with the provided JwtProperties.
+     *
+     * @param jwtProperties The properties used to configure the JWT service.
+     */
     public JwtService(JwtProperties jwtProperties) {
         this.secretKey = jwtProperties.getHmacSha();
         this.parser = Jwts.parser().verifyWith(this.secretKey).build();
     }
 
+    /**
+     * Generates a JWT string based on the provided claims.
+     *
+     * @param jwtClaims The claims to include in the JWT
+     * @return The generated JWT string
+     */
     public String generateJwt(JwtClaims jwtClaims) {
         return Jwts.builder()
             .id(jwtClaims.id().toString())
@@ -28,6 +42,13 @@ public class JwtService {
             .compact();
     }
 
+    /**
+     * Validates the provided JWT string and parses its claims. Validation includes checking
+     * the signature and expiration. If the JWT is not valid, an exception is thrown.
+     *
+     * @param jwt The JWT string to validate and parse.
+     * @return The parsed claims.
+     */
     public JwtClaims validateAndParseClaims(String jwt) {
         var claims = this.parser.parseSignedClaims(jwt).getPayload();
         return new JwtClaims(
