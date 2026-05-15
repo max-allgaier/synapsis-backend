@@ -1,0 +1,38 @@
+services:
+  app:
+    container_name: synapsis-backend
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    networks:
+      - database
+    depends_on:
+      database:
+        condition: service_healthy
+  database:
+    container_name: synapsis-postgres-database
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_DB=synapsis
+      - POSTGRES_USER=synapsis_user
+      - POSTGRES_PASSWORD=password123
+    ports:
+      - "5432:5432"
+    networks:
+      - database
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d synapsis -U synapsis_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  database:
+    driver: bridge
+
+volumes:
+  postgres-data:
