@@ -1,6 +1,7 @@
 package me.maxallgaier.synapsis.auth.service;
 
 import lombok.RequiredArgsConstructor;
+import me.maxallgaier.synapsis.auth.jwt.access.AccessTokenService;
 import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
 import me.maxallgaier.synapsis.user.User;
 import me.maxallgaier.synapsis.user.UserCreateInfo;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final UserService userService;
     private final RefreshTokenService refreshTokenService;
+    private final AccessTokenService accessTokenService;
     private final PasswordEncoder passwordEncoder;
 
     public User register(UserRegistrationInfo info) {
@@ -40,12 +42,12 @@ public class AuthService {
         }
 
         var refreshToken = this.refreshTokenService.generate(user);
-        var accessToken = this.refreshTokenService.validateAndGenerateAccessToken(refreshToken);
+        var accessToken = this.accessTokenService.validateAndGenerate(refreshToken);
 
         return new UserLoginResult(refreshToken, accessToken);
     }
 
     public String refresh(String refreshToken) {
-        return this.refreshTokenService.validateAndGenerateAccessToken(refreshToken);
+        return this.accessTokenService.validateAndGenerate(refreshToken);
     }
 }

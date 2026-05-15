@@ -15,23 +15,16 @@ public class RefreshTokenService {
     private final JwtService jwtService;
 
     public String generate(User user) {
-        var jwtClaims = new JwtClaims(
-            UUID.randomUUID(),
-            user.username(),
-            OffsetDateTime.now().plusDays(30),
-            user.role().toString()
-        );
+        var jwtClaims = JwtClaims.builder()
+            .id(UUID.randomUUID())
+            .subject(user.username())
+            .expiration(OffsetDateTime.now().plusDays(30))
+            .role(user.role().toString())
+            .build();
         return this.jwtService.generateJwt(jwtClaims);
     }
 
-    public String validateAndGenerateAccessToken(String refreshTokenJwt) {
-        var refreshTokenClaims = this.jwtService.validateAndParseClaims(refreshTokenJwt);
-        var accessTokenClaims = JwtClaims.builder()
-            .id(UUID.randomUUID())
-            .subject(refreshTokenClaims.subject())
-            .expiration(OffsetDateTime.now().plusDays(30))
-            .role(refreshTokenClaims.role())
-            .build();
-        return this.jwtService.generateJwt(accessTokenClaims);
+    public JwtClaims validateAndParseClaims(String refreshTokenJwt) {
+        return this.jwtService.validateAndParseClaims(refreshTokenJwt);
     }
 }
