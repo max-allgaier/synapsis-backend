@@ -14,6 +14,10 @@ import java.util.UUID;
 public class RefreshTokenService {
     private final JwtService jwtService;
 
+    public JwtClaims parseClaims(String refreshTokenJwt) {
+        return this.jwtService.validateAndParseClaims(refreshTokenJwt);
+    }
+
     public String generate(User user) {
         var jwtClaims = JwtClaims.builder()
             .id(UUID.randomUUID())
@@ -22,9 +26,5 @@ public class RefreshTokenService {
             .role(user.role().toString())
             .build();
         return this.jwtService.generateJwt(jwtClaims);
-    }
-
-    public JwtClaims validateAndParseClaims(String refreshTokenJwt) {
-        return this.jwtService.validateAndParseClaims(refreshTokenJwt);
     }
 }

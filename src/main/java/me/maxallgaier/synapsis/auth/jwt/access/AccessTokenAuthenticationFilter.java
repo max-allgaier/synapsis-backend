@@ -39,7 +39,7 @@ public class AccessTokenAuthenticationFilter extends OncePerRequestFilter {
             }
 
             var jwt = authorizationHeader.substring(BEARER_PREFIX.length());
-            var claims = this.accessTokenService.validateAndParseClaims(jwt);
+            var claims = this.accessTokenService.parseClaims(jwt);
 
             var authenticationToken = new UsernamePasswordAuthenticationToken(
                 claims.subject(),

@@ -42,12 +42,12 @@ public class AuthService {
         }
 
         var refreshToken = this.refreshTokenService.generate(user);
-        var accessToken = this.accessTokenService.validateAndGenerate(refreshToken);
+        var accessToken = this.accessTokenService.generate(refreshToken);
 
         return new UserLoginResult(refreshToken, accessToken);
     }
 
     public String refresh(String refreshToken) {
-        return this.accessTokenService.validateAndGenerate(refreshToken);
+        return this.accessTokenService.generate(refreshToken);
     }
 }
