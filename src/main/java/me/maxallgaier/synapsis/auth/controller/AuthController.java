@@ -37,13 +37,13 @@ public class AuthController {
             request.firstName(), request.lastName()
         );
         this.authService.register(userRegistrationInfo);
-        return ResponseEntity.status(HttpStatus.OK).body(new UserRegistrationResponse());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UserRegistrationResponse());
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<AuthRefreshResponse> refresh(@Valid @RequestBody AuthRefreshRequest request) {
         var accessToken = this.authService.refresh(request.refreshToken());
         var authRefreshResponse = new AuthRefreshResponse(accessToken);
-        return ResponseEntity.status(HttpStatus.OK).body(authRefreshResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authRefreshResponse);
     }
 }
