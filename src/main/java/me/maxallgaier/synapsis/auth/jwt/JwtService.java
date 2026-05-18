@@ -51,11 +51,11 @@ public class JwtService {
      */
     public JwtClaims validateAndParseClaims(String jwt) {
         var claims = this.parser.parseSignedClaims(jwt).getPayload();
-        return new JwtClaims(
-            UUID.fromString(claims.getId()),
-            claims.getSubject(),
-            claims.getExpiration().toInstant().atOffset(ZoneOffset.UTC),
-            claims.get("role", String.class)
-        );
+        return new JwtClaims.Builder()
+            .id(UUID.fromString(claims.getId()))
+            .subject(claims.getSubject())
+            .expiration(claims.getExpiration().toInstant().atOffset(ZoneOffset.UTC))
+            .role(claims.get("role", String.class))
+            .build();
     }
 }
