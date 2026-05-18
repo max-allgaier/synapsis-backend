@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.time.ZoneOffset;
 import java.util.UUID;
 
 /**
@@ -54,7 +53,7 @@ public class JwtService {
         return new JwtClaims.Builder()
             .id(UUID.fromString(claims.getId()))
             .subject(claims.getSubject())
-            .expiration(claims.getExpiration().toInstant().atOffset(ZoneOffset.UTC))
+            .expiration(claims.getExpiration().toInstant())
             .role(claims.get("role", String.class))
             .build();
     }

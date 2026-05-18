@@ -2,13 +2,13 @@ package me.maxallgaier.synapsis.auth.jwt;
 
 import lombok.Builder;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
 
 @Builder(builderClassName = "Builder")
-public record JwtClaims(UUID id, String subject, OffsetDateTime expiration, String role) {
+public record JwtClaims(UUID id, String subject, Instant expiration, String role) {
     public Date expirationAsDate() {
-        return Date.from(this.expiration.toInstant());
+        return Date.from(this.expiration);
     }
 }

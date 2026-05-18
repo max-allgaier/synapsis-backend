@@ -6,7 +6,8 @@ import me.maxallgaier.synapsis.auth.jwt.JwtService;
 import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
 import org.springframework.stereotype.Service;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class AccessTokenService {
         var accessTokenClaims = JwtClaims.builder()
             .id(UUID.randomUUID())
             .subject(refreshTokenClaims.subject())
-            .expiration(OffsetDateTime.now().plusDays(30))
+            .expiration(Instant.now().plus(60, ChronoUnit.MINUTES))
             .role(refreshTokenClaims.role())
             .build();
         return this.jwtService.generateJwt(accessTokenClaims);
