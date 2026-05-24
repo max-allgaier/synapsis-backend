@@ -7,7 +7,6 @@ import me.maxallgaier.synapsis.auth.controller.request.UserLoginRequest;
 import me.maxallgaier.synapsis.auth.controller.request.UserRegistrationRequest;
 import me.maxallgaier.synapsis.auth.controller.response.AuthRefreshResponse;
 import me.maxallgaier.synapsis.auth.controller.response.UserLoginResponse;
-import me.maxallgaier.synapsis.auth.controller.response.UserRegistrationResponse;
 import me.maxallgaier.synapsis.auth.service.AuthService;
 import me.maxallgaier.synapsis.auth.service.UserRegistrationInfo;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserRegistrationResponse> register(@Valid @RequestBody UserRegistrationRequest request) {
+    public ResponseEntity<Void> register(@Valid @RequestBody UserRegistrationRequest request) {
         var userRegistrationInfo = new UserRegistrationInfo(
             request.email(),
             request.username(),
@@ -44,7 +43,7 @@ public class AuthController {
             request.lastName()
         );
         this.authService.register(userRegistrationInfo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new UserRegistrationResponse());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/refresh")
