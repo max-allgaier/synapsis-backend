@@ -50,7 +50,7 @@ public class JwtService {
      */
     public JwtClaims validateAndParseClaims(String jwt) {
         var claims = this.parser.parseSignedClaims(jwt).getPayload();
-        return new JwtClaims.Builder()
+        return JwtClaims.builder()
             .id(UUID.fromString(claims.getId()))
             .subject(claims.getSubject())
             .expiration(claims.getExpiration().toInstant())

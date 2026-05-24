@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.UUID;
 
-@Builder(builderClassName = "Builder")
+@Builder
 public record JwtClaims(UUID id, String subject, Instant expiration, String role) {
     public JwtClaims {
         expiration = expiration.truncatedTo(ChronoUnit.SECONDS);

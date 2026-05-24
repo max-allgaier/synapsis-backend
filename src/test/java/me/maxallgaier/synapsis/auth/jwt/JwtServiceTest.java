@@ -14,7 +14,7 @@ class JwtServiceTest {
         var jwtProperties = new JwtProperties("test-secret-key-that-is-long-enough-for-hs256-algorithm");
         var jwtService = new JwtService(jwtProperties);
 
-        JwtClaims expectedJwtClaims = new JwtClaims.Builder()
+        JwtClaims expectedJwtClaims = JwtClaims.builder()
             .id(UUID.randomUUID())
             .subject("testuser@example.com")
             .expiration(Instant.now().plus(1, ChronoUnit.HOURS))
