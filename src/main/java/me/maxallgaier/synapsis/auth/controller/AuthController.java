@@ -25,16 +25,23 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<UserLoginResponse> login(@Valid @RequestBody UserLoginRequest request) {
-        var userLoginResult = this.authService.login(request.email(), request.password());
-        var userLoginResponse = new UserLoginResponse(userLoginResult.refreshToken(), userLoginResult.accessToken());
+        var refreshToken = this.authService.login(request.email(), request.password());
+        var userLoginResponse = new UserLoginResponse(
+            refreshToken.token(),
+            refreshToken.type(),
+            refreshToken.expiresIn()
+        );
         return ResponseEntity.status(HttpStatus.OK).body(userLoginResponse);
     }
 
     @PostMapping("/register")
     public ResponseEntity<UserRegistrationResponse> register(@Valid @RequestBody UserRegistrationRequest request) {
         var userRegistrationInfo = new UserRegistrationInfo(
-            request.email(), request.username(), request.password(),
-            request.firstName(), request.lastName()
+            request.email(),
+            request.username(),
+            request.password(),
+            request.firstName(),
+            request.lastName()
         );
         this.authService.register(userRegistrationInfo);
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserRegistrationResponse());
@@ -43,7 +50,11 @@ public class AuthController {
     @PostMapping("/refresh")
     public ResponseEntity<AuthRefreshResponse> refresh(@Valid @RequestBody AuthRefreshRequest request) {
         var accessToken = this.authService.refresh(request.refreshToken());
-        var authRefreshResponse = new AuthRefreshResponse(accessToken);
+        var authRefreshResponse = new AuthRefreshResponse(
+            accessToken.token(),
+            accessToken.type(),
+            accessToken.expiresIn()
+        );
         return ResponseEntity.status(HttpStatus.CREATED).body(authRefreshResponse);
     }
 }

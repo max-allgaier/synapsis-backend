@@ -7,7 +7,6 @@ import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -16,18 +15,25 @@ public class AccessTokenService {
     private final RefreshTokenService refreshTokenService;
     private final JwtService jwtService;
 
-    public JwtClaims parseClaims(String jwt) {
-        return this.jwtService.validateAndParseClaims(jwt);
+    public JwtClaims parseClaims(String accessToken) {
+        return this.jwtService.validateAndParseClaims(accessToken);
     }
 
-    public String generate(String refreshTokenJwt) {
-        var refreshTokenClaims = this.refreshTokenService.parseClaims(refreshTokenJwt);
+    public AccessToken generate(String refreshToken) {
+        var refreshTokenClaims = this.refreshTokenService.parseClaims(refreshToken);
+
+        int expiresInSeconds = 60 * 60;
         var accessTokenClaims = JwtClaims.builder()
             .id(UUID.randomUUID())
             .subject(refreshTokenClaims.subject())
-            .expiration(Instant.now().plus(60, ChronoUnit.MINUTES))
+            .expiration(Instant.now().plusSeconds(expiresInSeconds))
             .role(refreshTokenClaims.role())
             .build();
-        return this.jwtService.generateJwt(accessTokenClaims);
+        String token = this.jwtService.generateJwt(accessTokenClaims);
+
+        return AccessToken.builder()
+            .token(token)
+            .expiresIn(expiresInSeconds)
+            .build();
     }
 }

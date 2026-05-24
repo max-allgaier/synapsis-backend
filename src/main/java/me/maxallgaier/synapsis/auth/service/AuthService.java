@@ -1,7 +1,9 @@
 package me.maxallgaier.synapsis.auth.service;
 
 import lombok.RequiredArgsConstructor;
+import me.maxallgaier.synapsis.auth.jwt.access.AccessToken;
 import me.maxallgaier.synapsis.auth.jwt.access.AccessTokenService;
+import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshToken;
 import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
 import me.maxallgaier.synapsis.user.User;
 import me.maxallgaier.synapsis.user.UserCreateInfo;
@@ -26,13 +28,16 @@ public class AuthService {
         }
 
         var userCreateInfo = new UserCreateInfo(
-            info.email(), info.username(), hashedPassword,
-            info.firstName(), info.lastName()
+            info.email(),
+            info.username(),
+            hashedPassword,
+            info.firstName(),
+            info.lastName()
         );
         return this.userService.create(userCreateInfo);
     }
 
-    public UserLoginResult login(String email, String password) {
+    public RefreshToken login(String email, String password) {
         var user = this.userService.findByEmail(email)
             .orElseThrow(InvalidCredentialsException::new);
 
@@ -41,13 +46,10 @@ public class AuthService {
             throw new InvalidCredentialsException();
         }
 
-        var refreshToken = this.refreshTokenService.generate(user);
-        var accessToken = this.accessTokenService.generate(refreshToken);
-
-        return new UserLoginResult(refreshToken, accessToken);
+        return this.refreshTokenService.generate(user);
     }
 
-    public String refresh(String refreshToken) {
+    public AccessToken refresh(String refreshToken) {
         return this.accessTokenService.generate(refreshToken);
     }
 }
