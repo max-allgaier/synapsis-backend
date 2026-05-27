@@ -2,7 +2,7 @@ package me.maxallgaier.synapsis.auth.jwt.access;
 
 import lombok.RequiredArgsConstructor;
 import me.maxallgaier.synapsis.auth.jwt.JwtClaims;
-import me.maxallgaier.synapsis.auth.jwt.JwtService;
+import me.maxallgaier.synapsis.auth.jwt.JwtHelper;
 import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.UUID;
 @Service
 public class AccessTokenService {
     private final RefreshTokenService refreshTokenService;
-    private final JwtService jwtService;
+    private final JwtHelper jwtHelper;
 
     public JwtClaims parseClaims(String accessToken) {
-        return this.jwtService.validateAndParseClaims(accessToken);
+        return this.jwtHelper.validateAndParseClaims(accessToken);
     }
 
     public AccessToken generate(String refreshToken) {
@@ -29,7 +29,7 @@ public class AccessTokenService {
             .expiration(Instant.now().plusSeconds(expiresInSeconds))
             .role(refreshTokenClaims.role())
             .build();
-        String token = this.jwtService.generateJwt(accessTokenClaims);
+        String token = this.jwtHelper.generateJwt(accessTokenClaims);
 
         return AccessToken.builder()
             .token(token)

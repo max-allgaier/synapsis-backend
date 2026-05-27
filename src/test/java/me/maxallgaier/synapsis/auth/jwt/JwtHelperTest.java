@@ -8,11 +8,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class JwtServiceTest {
+class JwtHelperTest {
     @Test
     void createsAndVerifiesPayloadCorrectly() {
         var jwtProperties = new JwtProperties("test-secret-key-that-is-long-enough-for-hs256-algorithm");
-        var jwtService = new JwtService(jwtProperties);
+        var jwtHelper = new JwtHelper(jwtProperties);
 
         JwtClaims expectedJwtClaims = JwtClaims.builder()
             .id(UUID.randomUUID())
@@ -20,8 +20,8 @@ class JwtServiceTest {
             .expiration(Instant.now().plus(1, ChronoUnit.HOURS))
             .role("ADMIN")
             .build();
-        String jwt = jwtService.generateJwt(expectedJwtClaims);
+        String jwt = jwtHelper.generateJwt(expectedJwtClaims);
 
-        assertEquals(expectedJwtClaims, jwtService.validateAndParseClaims(jwt));
+        assertEquals(expectedJwtClaims, jwtHelper.validateAndParseClaims(jwt));
     }
 }

@@ -11,7 +11,7 @@ import java.util.UUID;
  * Service responsible for any JWT related actions, including generating and validating JSON Web Tokens (JWTs).
  */
 @Service
-public class JwtService {
+public class JwtHelper {
     private final SecretKey secretKey;
     private final JwtParser parser;
 
@@ -20,7 +20,7 @@ public class JwtService {
      *
      * @param jwtProperties The properties used to configure the JWT service.
      */
-    public JwtService(JwtProperties jwtProperties) {
+    public JwtHelper(JwtProperties jwtProperties) {
         this.secretKey = jwtProperties.getHmacSha();
         this.parser = Jwts.parser().verifyWith(this.secretKey).build();
     }

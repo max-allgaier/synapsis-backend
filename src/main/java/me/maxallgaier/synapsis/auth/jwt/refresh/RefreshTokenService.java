@@ -2,7 +2,7 @@ package me.maxallgaier.synapsis.auth.jwt.refresh;
 
 import lombok.RequiredArgsConstructor;
 import me.maxallgaier.synapsis.auth.jwt.JwtClaims;
-import me.maxallgaier.synapsis.auth.jwt.JwtService;
+import me.maxallgaier.synapsis.auth.jwt.JwtHelper;
 import me.maxallgaier.synapsis.user.User;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.UUID;
 @Service
 public class RefreshTokenService {
     private static final int DAYS_IN_SECONDS = 24 * 60 * 60;
-    private final JwtService jwtService;
+    private final JwtHelper jwtHelper;
 
     public JwtClaims parseClaims(String refreshToken) {
-        return this.jwtService.validateAndParseClaims(refreshToken);
+        return this.jwtHelper.validateAndParseClaims(refreshToken);
     }
 
     public RefreshToken generate(User user) {
@@ -27,7 +27,7 @@ public class RefreshTokenService {
             .expiration(Instant.now().plusSeconds(expiresInSeconds))
             .role(user.role().toString())
             .build();
-        var jwt = this.jwtService.generateJwt(jwtClaims);
+        var jwt = this.jwtHelper.generateJwt(jwtClaims);
 
         return RefreshToken.builder()
             .token(jwt)
