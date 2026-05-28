@@ -8,7 +8,12 @@ import java.util.Date;
 import java.util.UUID;
 
 @Builder
-public record JwtClaims(UUID id, String subject, Instant expiration, String role) {
+public record JwtClaims(
+    UUID id,
+    String subject,
+    Instant expiration,
+    String role
+) {
     public JwtClaims {
         expiration = expiration.truncatedTo(ChronoUnit.SECONDS);
     }
