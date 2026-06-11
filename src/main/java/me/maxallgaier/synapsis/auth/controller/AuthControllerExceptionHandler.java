@@ -13,7 +13,7 @@ import java.util.Map;
 public class AuthControllerExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(
-        UserAlreadyExistsException e
+        UserAlreadyExistsException userAlreadyExistsException
     ) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
             .body(Map.of("error", "user already exists"));
@@ -21,7 +21,7 @@ public class AuthControllerExceptionHandler {
 
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<Map<String, String>> handleInvalidCredentialsException(
-        InvalidCredentialsException e
+        InvalidCredentialsException invalidCredentialsException
     ) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(Map.of("error", "invalid credentials"));
