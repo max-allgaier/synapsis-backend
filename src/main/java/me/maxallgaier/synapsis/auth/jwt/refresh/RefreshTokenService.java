@@ -31,6 +31,7 @@ public class RefreshTokenService {
 
         return RefreshToken.builder()
             .token(jwt)
+            .type("Bearer")
             .expiresIn(expiresInSeconds)
             .build();
     }

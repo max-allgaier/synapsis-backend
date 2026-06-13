@@ -33,6 +33,7 @@ public class AccessTokenService {
 
         return AccessToken.builder()
             .token(token)
+            .type("Bearer")
             .expiresIn(expiresInSeconds)
             .build();
     }
