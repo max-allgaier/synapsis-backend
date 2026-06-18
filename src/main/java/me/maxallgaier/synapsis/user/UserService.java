@@ -1,5 +1,6 @@
 package me.maxallgaier.synapsis.user;
 
+import ch.qos.logback.classic.Logger;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.Optional;
 @NullMarked
 @Service
 public class UserService {
+    private final Logger logger;
     private final UserRepository userRepository;
 
     @Transactional
