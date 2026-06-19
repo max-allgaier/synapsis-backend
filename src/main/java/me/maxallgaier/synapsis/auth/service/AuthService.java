@@ -1,6 +1,7 @@
 package me.maxallgaier.synapsis.auth.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.maxallgaier.synapsis.auth.jwt.access.AccessToken;
 import me.maxallgaier.synapsis.auth.jwt.access.AccessTokenService;
 import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshToken;
@@ -12,6 +13,7 @@ import org.jspecify.annotations.NullMarked;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @RequiredArgsConstructor
 @NullMarked
 @Service
@@ -34,7 +36,10 @@ public class AuthService {
             info.firstName(),
             info.lastName()
         );
-        return this.userService.create(userCreateInfo);
+        var user = this.userService.create(userCreateInfo);
+        log.info("registered user id={}", user.id());
+
+        return user;
     }
 
     public RefreshToken login(String email, String password) {
@@ -46,7 +51,10 @@ public class AuthService {
             throw new InvalidCredentialsException();
         }
 
-        return this.refreshTokenService.generate(user);
+        var refreshToken = this.refreshTokenService.generate(user);
+        log.info("logged in user id={}", user.id());
+
+        return refreshToken;
     }
 
     public AccessToken refresh(String refreshToken) {

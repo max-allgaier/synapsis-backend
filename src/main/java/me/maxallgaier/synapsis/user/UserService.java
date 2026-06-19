@@ -1,18 +1,18 @@
 package me.maxallgaier.synapsis.user;
 
-import ch.qos.logback.classic.Logger;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @NullMarked
 @Service
 public class UserService {
-    private final Logger logger;
     private final UserRepository userRepository;
 
     @Transactional
@@ -30,8 +30,10 @@ public class UserService {
             .lastName(info.lastName())
             .role(Role.MEMBER)
             .build();
+        var savedUser = this.userRepository.save(user);
+        log.info("created user id={} email={} username={}", savedUser.id(), savedUser.email(), savedUser.username());
 
-        return this.userRepository.save(user);
+        return savedUser;
     }
 
     public Optional<User> findByEmail(String email) {
