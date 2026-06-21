@@ -12,13 +12,13 @@ import java.util.Map;
 @ControllerAdvice
 public class AuthControllerExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(UserAlreadyExistsException e) {
+    public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(UserAlreadyExistsException ignored) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
             .body(Map.of("error", "user already exists"));
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)
-    public ResponseEntity<Map<String, String>> handleInvalidCredentialsException(InvalidCredentialsException e) {
+    public ResponseEntity<Map<String, String>> handleInvalidCredentialsException(InvalidCredentialsException ignored) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(Map.of("error", "invalid credentials"));
     }
