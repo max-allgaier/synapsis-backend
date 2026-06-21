@@ -1,9 +1,9 @@
-package me.maxallgaier.synapsis.auth.jwt.access;
+package me.maxallgaier.synapsis.security.auth.jwt.access;
 
 import lombok.RequiredArgsConstructor;
-import me.maxallgaier.synapsis.auth.jwt.JwtClaims;
-import me.maxallgaier.synapsis.auth.jwt.JwtHelper;
-import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
+import me.maxallgaier.synapsis.security.auth.jwt.JwtClaims;
+import me.maxallgaier.synapsis.security.auth.jwt.JwtHelper;
+import me.maxallgaier.synapsis.security.auth.jwt.refresh.RefreshTokenService;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

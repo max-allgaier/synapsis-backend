@@ -1,5 +1,8 @@
 package me.maxallgaier.synapsis.auth.jwt;
 
+import me.maxallgaier.synapsis.security.auth.jwt.JwtClaims;
+import me.maxallgaier.synapsis.security.auth.jwt.JwtHelper;
+import me.maxallgaier.synapsis.security.auth.jwt.JwtProperties;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;

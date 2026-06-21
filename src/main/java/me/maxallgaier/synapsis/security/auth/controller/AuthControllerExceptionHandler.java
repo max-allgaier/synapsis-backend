@@ -1,6 +1,6 @@
-package me.maxallgaier.synapsis.auth.controller;
+package me.maxallgaier.synapsis.security.auth.controller;
 
-import me.maxallgaier.synapsis.auth.service.InvalidCredentialsException;
+import me.maxallgaier.synapsis.security.auth.service.InvalidCredentialsException;
 import me.maxallgaier.synapsis.user.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.controller.response;
+package me.maxallgaier.synapsis.security.auth.controller.response;
 
 public record UserLoginResponse(
     String refreshToken,

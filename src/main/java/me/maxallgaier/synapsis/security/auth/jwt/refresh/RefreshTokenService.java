@@ -1,8 +1,8 @@
-package me.maxallgaier.synapsis.auth.jwt.refresh;
+package me.maxallgaier.synapsis.security.auth.jwt.refresh;
 
 import lombok.RequiredArgsConstructor;
-import me.maxallgaier.synapsis.auth.jwt.JwtClaims;
-import me.maxallgaier.synapsis.auth.jwt.JwtHelper;
+import me.maxallgaier.synapsis.security.auth.jwt.JwtClaims;
+import me.maxallgaier.synapsis.security.auth.jwt.JwtHelper;
 import me.maxallgaier.synapsis.user.User;
 import org.springframework.stereotype.Service;
 

@@ -1,14 +1,14 @@
-package me.maxallgaier.synapsis.auth.controller;
+package me.maxallgaier.synapsis.security.auth.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import me.maxallgaier.synapsis.auth.controller.request.AuthRefreshRequest;
-import me.maxallgaier.synapsis.auth.controller.request.UserLoginRequest;
-import me.maxallgaier.synapsis.auth.controller.request.UserRegistrationRequest;
-import me.maxallgaier.synapsis.auth.controller.response.AuthRefreshResponse;
-import me.maxallgaier.synapsis.auth.controller.response.UserLoginResponse;
-import me.maxallgaier.synapsis.auth.service.AuthService;
-import me.maxallgaier.synapsis.auth.service.UserRegistrationInfo;
+import me.maxallgaier.synapsis.security.auth.controller.request.AuthRefreshRequest;
+import me.maxallgaier.synapsis.security.auth.controller.request.UserLoginRequest;
+import me.maxallgaier.synapsis.security.auth.controller.request.UserRegistrationRequest;
+import me.maxallgaier.synapsis.security.auth.controller.response.AuthRefreshResponse;
+import me.maxallgaier.synapsis.security.auth.controller.response.UserLoginResponse;
+import me.maxallgaier.synapsis.security.auth.service.AuthService;
+import me.maxallgaier.synapsis.security.auth.service.UserRegistrationInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

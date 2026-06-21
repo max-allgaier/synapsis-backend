@@ -1,11 +1,11 @@
-package me.maxallgaier.synapsis.auth.service;
+package me.maxallgaier.synapsis.security.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.maxallgaier.synapsis.auth.jwt.access.AccessToken;
-import me.maxallgaier.synapsis.auth.jwt.access.AccessTokenService;
-import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshToken;
-import me.maxallgaier.synapsis.auth.jwt.refresh.RefreshTokenService;
+import me.maxallgaier.synapsis.security.auth.jwt.access.AccessToken;
+import me.maxallgaier.synapsis.security.auth.jwt.access.AccessTokenService;
+import me.maxallgaier.synapsis.security.auth.jwt.refresh.RefreshToken;
+import me.maxallgaier.synapsis.security.auth.jwt.refresh.RefreshTokenService;
 import me.maxallgaier.synapsis.user.User;
 import me.maxallgaier.synapsis.user.UserCreateInfo;
 import me.maxallgaier.synapsis.user.UserService;

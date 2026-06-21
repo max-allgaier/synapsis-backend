@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.jwt;
+package me.maxallgaier.synapsis.security.auth.jwt;
 
 import io.jsonwebtoken.security.Keys;
 import org.springframework.boot.context.properties.ConfigurationProperties;

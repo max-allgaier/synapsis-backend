@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.controller.request;
+package me.maxallgaier.synapsis.security.auth.controller.request;
 
 import jakarta.validation.constraints.NotEmpty;
 

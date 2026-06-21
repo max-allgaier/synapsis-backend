@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.jwt.access;
+package me.maxallgaier.synapsis.security.auth.jwt.access;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

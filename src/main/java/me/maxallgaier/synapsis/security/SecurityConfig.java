@@ -1,7 +1,7 @@
 package me.maxallgaier.synapsis.security;
 
 import lombok.RequiredArgsConstructor;
-import me.maxallgaier.synapsis.auth.jwt.access.AccessTokenAuthenticationFilter;
+import me.maxallgaier.synapsis.security.auth.jwt.access.AccessTokenAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

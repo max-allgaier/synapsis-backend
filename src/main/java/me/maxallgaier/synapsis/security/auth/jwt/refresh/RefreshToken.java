@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.jwt.refresh;
+package me.maxallgaier.synapsis.security.auth.jwt.refresh;
 
 import lombok.Builder;
 

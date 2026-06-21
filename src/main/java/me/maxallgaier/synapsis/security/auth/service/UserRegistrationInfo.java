@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.service;
+package me.maxallgaier.synapsis.security.auth.service;
 
 public record UserRegistrationInfo(
     String email,

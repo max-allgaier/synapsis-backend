@@ -1,4 +1,4 @@
-package me.maxallgaier.synapsis.auth.jwt;
+package me.maxallgaier.synapsis.security.auth.jwt;
 
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
