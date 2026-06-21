@@ -23,7 +23,7 @@ public class AuthService {
     private final AccessTokenService accessTokenService;
     private final PasswordEncoder passwordEncoder;
 
-    public User register(UserRegistrationInfo info) {
+    public void register(UserRegistrationInfo info) {
         var hashedPassword = this.passwordEncoder.encode(info.password());
         if (hashedPassword == null) {
             throw new RuntimeException("null password hash");
@@ -38,8 +38,6 @@ public class AuthService {
         );
         var user = this.userService.create(userCreateInfo);
         log.info("registered user id={}", user.id());
-
-        return user;
     }
 
     public RefreshToken login(String email, String password) {
